@@ -20,7 +20,9 @@ class Theatre < ApplicationRecord
         name: row[1],
         management: row[2],
         source_org_id: row[3],
-        notes: row[4]
+        include: row[4],
+        status: row[5],
+        notes: row[6]
       )
     end
   end
