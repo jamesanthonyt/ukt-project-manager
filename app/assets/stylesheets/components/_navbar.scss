@@ -1,12 +1,16 @@
-.navbar-lewagon {
+.navbar-ukt {
   justify-content: space-between;
   background: white;
+  padding: 5px 0px 5px 0px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
+.navbar-ukt .navbar-brand img {
   width: 40px;
+  border-radius: 50%;
+}
+
+.navbar-ukt .logo-links {
+  display: flex;
+  align-items: center;
 }
