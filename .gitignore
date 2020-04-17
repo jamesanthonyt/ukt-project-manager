@@ -36,6 +36,9 @@ yarn-debug.log*
 # Ignore .env file containing credentials.
 .env*
 
+#Ignore manual upload CSVs fro development
+/lib/*.csv
+
 # Ignore Mac and Linux file system files
 *.swp
 .DS_Store
