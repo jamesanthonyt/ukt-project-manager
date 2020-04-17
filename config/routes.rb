@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { passwords: 'passwords' }
   root to: 'pages#home'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :theatres, except: :destroy do
+    resources :performance_spaces, except: [:index, :destroy]
+    resources :af_venues, only: :show do
+      resources :af_venue_mappings, only: [:destroy, :create, :new]
+    end
+  end
 end
+
