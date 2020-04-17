@@ -1,0 +1,20 @@
+<%= simple_form_for(@theatre) do |f| %>
+  <%= f.input :name, label: "Theatre name" %>
+  <%= f.input :management, label: "Type", collection: [
+    'Independent',
+    'ATG',
+    'HQ Theatres',
+    'SellaDoor'
+  ] %>
+  <% if @theatre.source_org.present? %>
+    <%= f.association :source_org, label: "AF Source Org", disabled: true %>
+  <% else %>
+    <%= f.association :source_org, label: "AF Source Org", collection: @source_orgs, disabled: @used_src_org_ids %>
+  <% end %>
+  <% if @theatre.persisted? %>
+    <%= f.input :include, label: "Include in project?" %>
+  <% end %>
+  <%= f.input :notes, label: "Notes" %>
+  <%= f.submit class: "btn btn-success" %>
+  <%= link_to "Cancel", :back %>
+<% end %>

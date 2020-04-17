@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      Membership List | <%= link_to 'Add new member', new_theatre_path %>
+    </h4>
+    <table class="table table-hover mt-3">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Theatre Name</th>
+          <th scope="col">Management</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @theatres.each do |theatre| %>
+        <tr>
+          <td><%= link_to theatre.name, theatre_path(theatre) %></td>
+          <td><%= theatre.management %></td>
+          <td><%= status(theatre) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

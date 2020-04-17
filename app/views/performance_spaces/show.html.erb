@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      <%= @theatre.name %>: <%= @performance_space.name %> |
+      <%= link_to 'Edit', edit_theatre_performance_space_path(@theatre, @performance_space) %>
+    </h4>
+
+    <ul class="list-group list-group-flush mt-3">
+      <li class="list-group-item"><strong>Type:</strong> <%= @performance_space.space_type %></li>
+      <li class="list-group-item"><strong>Capacity:</strong> <%= @performance_space.capacity %></li>
+      <li class="list-group-item"><strong>Programme:</strong> <%= @performance_space.programme %></li>
+      <li class="list-group-item"><strong>Grouping:</strong> <%= group_name(@performance_space.grouping) %></li>
+      <li class="list-group-item"><strong>AF Venues:</strong>
+        <% if @af_venues.present? %>
+          <% venues = []
+            @af_venues.each { |venue| venues << venue.name } %>
+          <%= venues.join(', ') %>
+        <% else %>
+          <span style="color: red;">
+            This performance space will not be included in analysis until it has
+            beed mapped to an Audience Finder venue.
+          </span>
+        <% end %>
+      </li>
+      <li class="list-group-item"><strong>Notes:</strong> <%= @performance_space.notes %></li>
+    </ul>
+  </div>
+</div>
+

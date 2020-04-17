@@ -1,0 +1,22 @@
+<%= simple_form_for([@theatre, @performance_space]) do |f| %>
+  <%= f.input :name, label: "Performance space name" %>
+  <%= f.input :space_type, collection: [
+    'Main Auditorium',
+    'Subsidiary Auditorium',
+    'Concert Hall',
+    'Cinema',
+    'Cabaret Space',
+    'Studio Space',
+    'Other'
+  ] %>
+  <%= f.input :capacity, input_html: { min: '0' } %>
+  <%= f.input :programme, collection: [
+    'Only produced in-house',
+    'More produced in-house',
+    'More presented/toured',
+    'Only presented/toured'
+  ] %>
+  <%= f.input :notes %>
+  <%= f.submit class: "btn btn-success" %>
+  <%= link_to "Cancel", :back %>
+<% end %>

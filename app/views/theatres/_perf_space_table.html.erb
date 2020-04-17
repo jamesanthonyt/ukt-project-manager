@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      Step 1: Performance spaces | <%= link_to 'Add new performance space', new_theatre_performance_space_path(@theatre) %>
+    </h4>
+
+    <% if @performance_spaces.count > 0 %>
+      <p>Below is a list of performance spaces which have been defined by
+        <span style="font-style: italic;"><%= @theatre.name %></span>.
+        The spaces are automatically grouped based on their individual details.
+        These must be mapped to <span style="font-style: italic;"><%= @theatre.name %>'s</span>
+        Audience Finder venues to be included the UK Theatre reporting.
+      </p>
+      <table class="table table-striped table-hover mt-3">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Performance Space</th>
+            <th scope="col">Grouping</th>
+            <th scope="col">Mapped?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @performance_spaces.each do |space| %>
+          <tr>
+            <td><%= link_to space.name, theatre_performance_space_path(@theatre, space.id) %></td>
+            <td><%= group_name(space.grouping) %></td>
+            <td>
+              <% if space.af_venue_mappings.present? %>
+                <span style="color: green;">Yes</span>
+              <% else %>
+                <span style="color: red;">No</span>
+              <% end %>
+              </td>
+
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p><span style="font-style: italic;"><%= @theatre.name %>'s</span> performance
+        spaces have not yet been defined. Please add a performance space to include
+        them in the UK Theatre reporting.
+      </p>
+    <% end %>
+  </div>
+</div>

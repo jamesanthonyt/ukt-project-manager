@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Add new mapping</h3>
+
+    <%= simple_form_for([@theatre, @af_venue, @mapping]) do |f| %>
+      <%= f.input :performance_space_id, collection: @theatre_performance_spaces %>
+      <%= f.submit class: "btn btn-success" %>
+      <%= link_to "Cancel", :back %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<% if @performance_spaces.count > 0 %>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">
+      Step 2: Audience Finder venues
+    </h4>
+    <% if @theatre.af_venues.count > 0 %>
+      <p>
+        Below is a list of venues which are visible through the ticketing data
+        <span style="font-style: italic;"><%= @theatre.name %></span> has provided
+        through Audience Finder. Please map each of these to one of the definied
+        performance spaces above to include the ticketing data within the UK Theatre
+        report.
+      </p>
+
+      <table class="table table-striped table-hover mt-3">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Audience Finder Venue</th>
+            <th scope="col">Available?</th>
+            <th scope="col">Performance Space</th>
+            <th scope="col"></th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <% @af_venues.each do |venue| %>
+            <tr>
+              <td>
+                <% if venue.name.nil? %>
+                  [BLANK]
+                <% else %>
+                  <%= venue.name %>
+                <% end %>
+              </td>
+              <td>
+                <% if venue.deleted %>
+                  Removed from B/O
+                <% else %>
+                  Available
+                <% end %>
+              </td>
+              <% if venue.af_venue_mapping.present? %>
+                <td><%= venue.af_venue_mapping.performance_space.name %></td>
+              <% else %>
+                <td></td>
+              <% end %>
+              <td>
+                <% if venue.af_venue_mapping.present? %>
+                  <%= link_to_if venue.deleted == false, 'Remove mapping',
+                    theatre_af_venue_af_venue_mapping_path(@theatre, venue, venue.af_venue_mapping),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" } %>
+                <% else %>
+                  <%= link_to_if venue.deleted == false, "Map to perf space",
+                    new_theatre_af_venue_af_venue_mapping_path(@theatre, venue, venue.af_venue_mapping) %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>
+        <span style="font-style: italic;"><%= @theatre.name %></span> has not
+        provided any venue data through Audience Finder. Their data cannot be included
+        within the UK Theatre report until this has been made available.
+      </p>
+    <% end %>
+  </div>
+</div>
+<% end %>
