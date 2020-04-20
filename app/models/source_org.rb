@@ -7,7 +7,7 @@ class SourceOrg < ApplicationRecord
   require 'csv'
 
   def self.import_af_source_orgs
-    csv = CSV.read('lib/af-source-orgs.csv', headers: true, encoding:'iso-8859-1:utf-8')
+    csv = CSV.read('data/af-source-orgs.csv', headers: true, encoding:'iso-8859-1:utf-8')
     csv.each do |row|
       next if source_org_found_available?(row)
 

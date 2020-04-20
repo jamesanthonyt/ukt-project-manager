@@ -6,7 +6,7 @@ class AfVenue < ApplicationRecord
   require 'csv'
 
   def self.import_af_venues
-    csv = CSV.read('lib/af-venues.csv', headers: true, encoding:'iso-8859-1:utf-8')
+    csv = CSV.read('data/af-venues.csv', headers: true, encoding:'iso-8859-1:utf-8')
     csv.each do |row|
       next if venue_found_available?(row)
 

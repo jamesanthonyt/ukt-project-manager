@@ -14,7 +14,7 @@ class Theatre < ApplicationRecord
   def self.import_theatres
     require 'csv'
     Theatre.destroy_all
-    CSV.foreach(Rails.root.join('lib/UKTTheatres.csv'), headers: true) do |row|
+    CSV.foreach(Rails.root.join('data/UKTTheatres.csv'), headers: true) do |row|
       Theatre.create(
         id: row[0],
         name: row[1],

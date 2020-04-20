@@ -8,7 +8,7 @@ class AfVenueMapping < ApplicationRecord
   def self.import_af_venue_mappings
     require 'csv'
     AfVenueMapping.destroy_all
-    CSV.foreach(Rails.root.join('lib/UKTVenueMappings.csv'), headers: true) do |row|
+    CSV.foreach(Rails.root.join('data/UKTVenueMappings.csv'), headers: true) do |row|
       AfVenueMapping.create(
         id: row[0],
         af_venue_id: row[1],

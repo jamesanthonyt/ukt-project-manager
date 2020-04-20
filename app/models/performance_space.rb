@@ -25,7 +25,7 @@ class PerformanceSpace < ApplicationRecord
   def self.import_performance_spaces
     require 'csv'
     PerformanceSpace.destroy_all
-    CSV.foreach(Rails.root.join('lib/UKTPerformancespaces.csv'), headers: true) do |row|
+    CSV.foreach(Rails.root.join('data/UKTPerformancespaces.csv'), headers: true) do |row|
       PerformanceSpace.create!(
         id: row[0],
         name: row[1],
