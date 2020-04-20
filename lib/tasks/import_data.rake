@@ -1,3 +1,5 @@
+require 'aws-sdk-s3'
+
 namespace :import do
   desc 'This imports AF and UKT data from CSVs'
 

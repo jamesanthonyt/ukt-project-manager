@@ -16,6 +16,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 gem 'breadcrumbs_on_rails'
+gem 'aws-sdk'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
