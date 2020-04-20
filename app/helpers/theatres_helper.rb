@@ -21,6 +21,8 @@ module TheatresHelper
       '<span style="color: red; font-weight: bold;">Theatre removed from project</span>'.html_safe
     elsif theatre.source_org.nil?
       '<span style="color: red">Theatre requires onboarding</span>'.html_safe
+    elsif theatre.source_org.deleted == true
+      '<span style="color: red">Source Org no longer available</span>'.html_safe
     elsif theatre.performance_spaces.empty?
       '<span style="color: orange">Performance spaces require defining</span>'.html_safe
     elsif any_performance_spaces_unmapped?(theatre)
