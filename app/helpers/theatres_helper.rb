@@ -17,26 +17,21 @@ module TheatresHelper
   end
 
   def status(theatre)
-    if theatre.include == false
-      '<span style="color: red; font-weight: bold;">Theatre removed from project</span>'.html_safe
-    elsif theatre.source_org.nil?
-      '<span style="color: red">Theatre requires onboarding</span>'.html_safe
-    elsif theatre.source_org.deleted == true
-      '<span style="color: red">Source Org no longer available</span>'.html_safe
-    elsif theatre.performance_spaces.empty?
-      '<span style="color: orange">Performance spaces require defining</span>'.html_safe
-    elsif any_performance_spaces_unmapped?(theatre)
-      '<span style="color: orange">Performance spaces require mapping</span>'.html_safe
-    else
-      '<span style="color: green">Ready for reporting</span>'.html_safe
-    end
-  end
+    status_class = ''
 
-  def any_performance_spaces_unmapped?(theatre)
-    mappings = []
-    theatre.performance_spaces.each do |space|
-      mappings << space.af_venue_mappings.present?
+    case theatre.status
+    when 'Theatre removed from project'
+      status_class = "'text-danger font-weight-bold'"
+    when 'Theatre requires onboarding', 'Source Org no longer available'
+      status_class = 'text-danger'
+    when 'Performance spaces require defining', 'Performance spaces require mapping'
+      status_class = 'text-warning'
+    when 'Ready for reporting'
+      status_class = 'text-success'
+    else
+      status_class = 'text-secondary'
     end
-    mappings.include?(false)
+
+    "<span class=#{status_class}>#{theatre.status}</span>".html_safe
   end
 end
