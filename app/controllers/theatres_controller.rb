@@ -36,6 +36,7 @@ class TheatresController < ApplicationController
 
   def update
     if @theatre.update!(theatre_params)
+      update_status!(@theatre)
       redirect_to theatre_path(@theatre)
     else
       render :edit

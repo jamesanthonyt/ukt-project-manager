@@ -11,6 +11,7 @@ class AfVenueMappingsController < ApplicationController
     @mapping.source_org_id = @af_venue.source_org_id
     @mapping.update(af_mapping_params)
     if @mapping.save
+      update_status!(@theatre)
       redirect_to theatre_path(@theatre)
     else
       render :new

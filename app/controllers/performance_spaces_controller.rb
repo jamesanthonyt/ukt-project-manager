@@ -27,9 +27,10 @@ class PerformanceSpacesController < ApplicationController
   def edit; end
 
   def update
-    if @performance_space.update(performance_space_params)
+    if @performance_space.update!(performance_space_params)
       assign_group(@performance_space)
-      @performance_space.save
+      @performance_space.save!
+      update_status!(@theatre)
       redirect_to theatre_path(@theatre)
     else
       render :edit
