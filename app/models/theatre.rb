@@ -26,4 +26,17 @@ class Theatre < ApplicationRecord
       )
     end
   end
+
+  def self.to_csv
+    require 'csv'
+    attributes = %w{id name management source_org_id include  status notes created_at updated_at}
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.each do |theatre|
+        csv << attributes.map{ |attr| theatre.send(attr) }
+      end
+    end
+  end
 end

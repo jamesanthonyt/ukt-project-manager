@@ -5,6 +5,10 @@ class TheatresController < ApplicationController
 
   def index
     @theatres = Theatre.all.order(:name)
+    respond_to do |format|
+      format.html
+      format.csv { send_data @theatres.to_csv, filename: "ukt-tracking-#{Date.today}.csv" }
+    end
   end
 
   def show
